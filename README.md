@@ -1,5 +1,9 @@
 # DesignDetective
 
+### Preview
+
+<img src="../main/Sources/DesignDetective/Demo/demo.gif" height="240"/>
+
 ### Usage
 
 You may trigger anywhere, but I personally prefer using it via Shake Gesture
@@ -25,7 +29,7 @@ Our Detective grabs the most top view controller's view's snapshot (image), and 
 
 Accepts you to load image (via a URL), after you paste a url to your clipboard, you should be ready to go.
 
-Or alternatively you can select an image from your photo album.
+Or alternatively you can select an image from your photo album. (You can drag drop an image to the simulator)
 
 To activate the detective, shake simulator/device ( for simulator => menu `Device > Shake`  or via shortcut  `Ctrl + CMD + Z` )
 
