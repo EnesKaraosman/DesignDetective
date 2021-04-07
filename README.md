@@ -2,7 +2,7 @@
 
 ### Preview
 
-<img src="../main/Sources/DesignDetective/Demo/demo.gif" height="240"/>
+<img src="../main/Sources/DesignDetective/Demo/demo.gif" height="280"/>
 
 ### Usage
 
@@ -13,14 +13,15 @@ import DesignDetective
 
 extension UIWindow {
     open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        #if DEBUG
         if motion == .motionShake {
-            print("Device shaken")
             if DesignDetective.shared.isActive {
                 DesignDetective.shared.deActivate()
             } else {
                 try? DesignDetective.shared.activate()
             }
         }
+        #endif
     }
 }
 ```
