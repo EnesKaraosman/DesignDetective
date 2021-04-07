@@ -63,19 +63,29 @@ internal struct DesignDetectiveView: View {
     }
     
     func emptyScreenView() -> some View {
-        VStack {
-            Button("Copy image URL to the clipboard of device then tap here!") {
-                if let url = UIPasteboard.general.url {
-                    print(url)
-                    viewModel.getImagefromURL(url)
-                } else {
-                    print("No URL copied")
+        GeometryReader { gr in
+            VStack {
+                Button("Copy image URL to the clipboard of device then tap here!") {
+                    if let url = UIPasteboard.general.url {
+                        print(url)
+                        viewModel.getImagefromURL(url)
+                    } else {
+                        print("No URL copied")
+                    }
+                }.padding()
+                Divider()
+                pickImage
+                ImagePicker(sourceType: self.imagePickerSourceType) { image in
+                    if image != nil {
+                        DispatchQueue.main.async {
+                            self.viewModel.image = image
+                        }
+                    }
+                    self.showImagePicker = false
                 }
+                .frame(height: gr.size.height * 0.8)
             }
-            Divider()
-            Text("Or select an image from photos")
-            pickImage
-        }.padding()
+        }
     }
     
     @State private var showImagePicker = false
@@ -83,10 +93,12 @@ internal struct DesignDetectiveView: View {
     
     private var pickImage: some View {
         HStack {
+            Text("Or select an image from photos").font(.footnote)
+            Spacer()
             Image(systemName: "photo").imageScale(.large).foregroundColor(.accentColor).onTapGesture {
                 self.imagePickerSourceType = .photoLibrary
                 self.showImagePicker = true
-            }
+            }.padding(.horizontal)
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 Image(systemName: "camera").imageScale(.large).foregroundColor(.accentColor).onTapGesture {
                     self.imagePickerSourceType = .camera
@@ -94,6 +106,7 @@ internal struct DesignDetectiveView: View {
                 }
             }
         }
+        .padding(.horizontal)
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: self.imagePickerSourceType) { image in
                 if image != nil {
