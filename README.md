@@ -26,7 +26,7 @@ extension UIWindow {
 }
 ```
 
-Our Detective grabs the most top view controller's view's snapshot (image), and presents a screen above it.
+Our Detective grabs the most top view controller's view's snapshot (image), and presents a screen (including image) above actual screen.
 
 Accepts you to load image (via a URL), after you paste a url to your clipboard, you should be ready to go.
 
